@@ -7,7 +7,7 @@ const products = [
     { name: 'Microwave', price: 150, category: 'Electronics', ratings: [4, 5, 4, 5] },
     { name: 'Shoes', price: 50, category: 'Apparel', ratings: [5, 5, 4, 4] },
     { name: 'Bag', price: 70, category: 'Apparel', ratings: [3, 4, 3, 4, 4] },
-    { name: 'Headphones', price: 100, category: 'Electronics', ratings: [5, 2, 5, 4, 4] }
+    { name: 'Headphones', price: 100, category: 'Electronics', ratings: [5, 5, 5, 4, 4] }
 ];
 
 // Your job is to use array methods to complete the following tasks on such a dataset, as follows:
@@ -37,10 +37,22 @@ console.log(arr);
 // Are there any products with a rating below 3?
 console.log();
 console.log("rating below 3");
-const filteredProducts = products.filter(product =>
-    product.ratings.some(rating => rating < 3)
-);
-console.log(filteredProducts);
+// const filteredProducts = products.filter(product =>
+//     product.ratings.some(rating => rating < 3)
+// );
+// console.log(filteredProducts);
+const lessRated = products.filter(function(item) {
+    return check(item.ratings);
+})
+console.log(lessRated);
+
+
+function check(ratings) {
+    for (let i = 0; i < ratings.length; i++) {
+        if (ratings[i] < 3) return true;
+    }
+    return false;
+}
 
 // Are all the products below $1500?
 console.log();
@@ -55,7 +67,6 @@ console.log();
 console.log("first product that belongs to the 'Electronics' category");
 let electronics = products.filter(item => item.category === "Electronics")
 console.log(electronics[0]);
-
 
 // Calculate the total cost of all products combined.
 console.log();
@@ -72,7 +83,11 @@ console.log("array containing the average rating of each product.");
 let avgRating = [];
 
 function average(obj) {
-    const sum = obj.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    //const sum = obj.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    let sum = 0;
+    for (let i = 0; i < obj.length; i++) {
+        sum += obj[i];
+    }
     return sum / obj.length;
 }
 
@@ -80,7 +95,6 @@ products.forEach(function(obj) {
     avgRating.push(average(obj.ratings))
 })
 console.log(avgRating);
-
 
 
 
